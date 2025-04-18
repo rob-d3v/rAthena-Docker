@@ -1,0 +1,23 @@
+[Status]: Memory manager initialised: log/login-server.leaks
+
+                                                                      
+                   rAthena Development Team presents                  
+                      ___   __  __                                    
+                _____/   | / /_/ /_  ___  ____  ____ _                
+               / ___/ /| |/ __/ __ \/ _ \/ __ \/ __ `/                
+              / /  / ___ / /_/ / / /  __/ / / / /_/ /                 
+             /_/  /_/  |_\__/_/ /_/\___/_/ /_/\__,_/                  
+                                                                      
+                     http://rathena.org/board/                        
+                                                                      
+[Info]: Git Hash: '0a633386504bd580fd34f2a798fc250b9df22a69'
+[Info]: Server uses 'select' as event dispatcher
+[Info]: Server supports up to '1024' concurrent connections.
+[Info]: Finished reading conf/import/inter_conf.txt.
+[Info]: Finished reading conf/inter_athena.conf.
+[Info]: Finished reading conf/import/login_conf.txt.
+[Info]: Finished reading conf/login_athena.conf.
+[Info]: Done reading '23' messages in 'conf/msg_conf/login_msg.conf'.
+[Info]: Ipban connection made.
+[Status]: The login-server is ready (Server is listening on the port 6900).
+

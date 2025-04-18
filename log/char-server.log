@@ -1,0 +1,45 @@
+[Status]: Memory manager initialised: log/char-server.leaks
+
+                                                                      
+                   rAthena Development Team presents                  
+                      ___   __  __                                    
+                _____/   | / /_/ /_  ___  ____  ____ _                
+               / ___/ /| |/ __/ __ \/ _ \/ __ \/ __ `/                
+              / /  / ___ / /_/ / / /  __/ / / / /_/ /                 
+             /_/  /_/  |_\__/_/ /_/\___/_/ /_/\__,_/                  
+                                                                      
+                     http://rathena.org/board/                        
+                                                                      
+[Info]: Git Hash: '0a633386504bd580fd34f2a798fc250b9df22a69'
+[Info]: Server uses 'select' as event dispatcher
+[Info]: Server supports up to '1024' concurrent connections.
+[Info]: Done reading conf/import/char_conf.txt.
+[Info]: Done reading conf/char_athena.conf.
+[Info]: Done reading conf/import/inter_conf.txt.
+[Info]: Done reading conf/inter_athena.conf.
+[Info]: Done reading '169' messages in 'conf/msg_conf/char_msg.conf'.
+[Warning]: Using the default user/password s1/p1 is NOT RECOMMENDED.
+[Notice]: Please edit your 'login' table to create a proper inter-server user/password (gender 'S')
+[Notice]: And then change the user/password to use in conf/char_athena.conf (or conf/import/char_conf.txt)
+[Info]: Done reading conf/import/inter_conf.txt.
+[Info]: Done reading conf/inter_athena.conf.
+[Info]: Connect Character DB server.... (Character Server)
+[Status]: Loading 'conf/inter_server.yml'...[Status]: Loading '1' entries in 'conf/inter_server.yml'
+[Status]: Done reading '1' entries in 'conf/inter_server.yml'
+[Status]: Loading 'conf/import/inter_server.yml'...[Status]: Loading 'db/exp_guild.yml'...[Status]: Loading 'db/re/exp_guild.yml'...[Status]: Loading '49' entries in 'db/re/exp_guild.yml'
+[Status]: Done reading '49' entries in 'db/re/exp_guild.yml'
+[Status]: Loading 'db/import/exp_guild.yml'...[Info]: Clan loaded (1 - Swordman Clan)
+[Info]: Clan loaded (2 - Arcwand Clan)
+[Info]: Clan loaded (3 - Golden Mace Clan)
+[Info]: Clan loaded (4 - Crossbow Clan)
+[Status]: Finished Reading GeoIP Database.
+[Status]: Characters per Account: '0'.
+[Status]: Defaulting to 172.18.0.3 as our IP address
+[Info]: Start checking DB integrity
+[Info]: DB integrity check finished with success
+[Status]: The char-server is ready (Server is listening on the port 6121).
+
+[Info]: Attempt to connect to login-server...
+[Status]: Connecting to 172.18.0.3:6900
+[Status]: Connected to login-server (connection #6).
+[Status]: Awaiting maps from map-server.

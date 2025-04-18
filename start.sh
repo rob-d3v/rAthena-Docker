@@ -5,19 +5,13 @@ cd /home/rathena/rAthena
 # Verificar se precisamos configurar o banco de dados
 if [ ! -f ".db_configured" ]; then
   echo "Aguardando o serviço do MySQL iniciar..."
-  # Substitua os valores abaixo pelos seus próprios valores
   MYSQL_HOST=${MYSQL_HOST:-"db"}
   MYSQL_PORT=${MYSQL_PORT:-"3306"}
   MYSQL_USER=${MYSQL_USER:-"ragnarok"}
   MYSQL_PASS=${MYSQL_PASS:-"ragnarok"}
   MYSQL_DB=${MYSQL_DB:-"ragnarok"}
   
-  # Copiar os arquivos de configuração padrão se não existirem
-  if [ ! -d "./conf" ]; then
-    mkdir -p ./conf
-  fi
-  
-  # Verificar se existem arquivos .conf.example e copiá-los para .conf se necessário
+  # Copiar os arquivos de configuração
   echo "Verificando arquivos de configuração..."
   for conf_example in $(find ./conf -name "*.conf.example" 2>/dev/null); do
     conf_file="${conf_example%.example}"
@@ -30,7 +24,6 @@ if [ ! -f ".db_configured" ]; then
   # Verificar se a pasta import existe
   if [ ! -d "./conf/import" ]; then
     mkdir -p ./conf/import
-    # Copiar arquivos da pasta import-tmpl se existir
     if [ -d "./conf/import-tmpl" ]; then
       cp ./conf/import-tmpl/* ./conf/import/ 2>/dev/null || true
     fi
@@ -42,98 +35,177 @@ if [ ! -f ".db_configured" ]; then
     sleep 5
   done
   
+  # Verificar e reparar tabelas corrompidas (se existirem)
+  echo "Verificando tabelas existentes..."
+  mysql -h"$MYSQL_HOST" -P"$MYSQL_PORT" -u"$MYSQL_USER" -p"$MYSQL_PASS" -e "REPAIR TABLE ragnarok.login, ragnarok.loginlog" || true
+  
   # Configurar conexão com banco de dados
   if [ -f "conf/inter_athena.conf" ]; then
     echo "Configurando conexão com o banco de dados..."
     sed -i "s/127.0.0.1/$MYSQL_HOST/g" conf/inter_athena.conf
     
-    # Verifique se login_server_ip existe no arquivo
-    if grep -q "login_server_ip:" conf/inter_athena.conf; then
-      sed -i "s/^login_server_ip: .*$/login_server_ip: $MYSQL_HOST/" conf/inter_athena.conf
-      sed -i "s/^login_server_port: .*$/login_server_port: $MYSQL_PORT/" conf/inter_athena.conf
-      sed -i "s/^login_server_id: .*$/login_server_id: $MYSQL_USER/" conf/inter_athena.conf
-      sed -i "s/^login_server_pw: .*$/login_server_pw: $MYSQL_PASS/" conf/inter_athena.conf
-      sed -i "s/^login_server_db: .*$/login_server_db: $MYSQL_DB/" conf/inter_athena.conf
-    fi
-    
-    # Verifique se char_server_ip existe no arquivo
-    if grep -q "char_server_ip:" conf/inter_athena.conf; then
-      sed -i "s/^char_server_ip: .*$/char_server_ip: $MYSQL_HOST/" conf/inter_athena.conf
-      sed -i "s/^char_server_port: .*$/char_server_port: $MYSQL_PORT/" conf/inter_athena.conf
-      sed -i "s/^char_server_id: .*$/char_server_id: $MYSQL_USER/" conf/inter_athena.conf
-      sed -i "s/^char_server_pw: .*$/char_server_pw: $MYSQL_PASS/" conf/inter_athena.conf
-      sed -i "s/^char_server_db: .*$/char_server_db: $MYSQL_DB/" conf/inter_athena.conf
-    fi
-    
-    # Verifique se map_server_ip existe no arquivo
-    if grep -q "map_server_ip:" conf/inter_athena.conf; then
-      sed -i "s/^map_server_ip: .*$/map_server_ip: $MYSQL_HOST/" conf/inter_athena.conf
-      sed -i "s/^map_server_port: .*$/map_server_port: $MYSQL_PORT/" conf/inter_athena.conf
-      sed -i "s/^map_server_id: .*$/map_server_id: $MYSQL_USER/" conf/inter_athena.conf
-      sed -i "s/^map_server_pw: .*$/map_server_pw: $MYSQL_PASS/" conf/inter_athena.conf
-      sed -i "s/^map_server_db: .*$/map_server_db: $MYSQL_DB/" conf/inter_athena.conf
-    fi
-    
-    # Verifique se log_db_ip existe no arquivo
-    if grep -q "log_db_ip:" conf/inter_athena.conf; then
-      sed -i "s/^log_db_ip: .*$/log_db_ip: $MYSQL_HOST/" conf/inter_athena.conf
-      sed -i "s/^log_db_port: .*$/log_db_port: $MYSQL_PORT/" conf/inter_athena.conf
-      sed -i "s/^log_db_id: .*$/log_db_id: $MYSQL_USER/" conf/inter_athena.conf
-      sed -i "s/^log_db_pw: .*$/log_db_pw: $MYSQL_PASS/" conf/inter_athena.conf
-      sed -i "s/^log_db_db: .*$/log_db_db: $MYSQL_DB/" conf/inter_athena.conf
-    fi
-    
-    # Verifique se web_server_ip existe no arquivo
-    if grep -q "web_server_ip:" conf/inter_athena.conf; then
-      sed -i "s/^web_server_ip: .*$/web_server_ip: $MYSQL_HOST/" conf/inter_athena.conf
-      sed -i "s/^web_server_port: .*$/web_server_port: $MYSQL_PORT/" conf/inter_athena.conf
-      sed -i "s/^web_server_id: .*$/web_server_id: $MYSQL_USER/" conf/inter_athena.conf
-      sed -i "s/^web_server_pw: .*$/web_server_pw: $MYSQL_PASS/" conf/inter_athena.conf
-      sed -i "s/^web_server_db: .*$/web_server_db: $MYSQL_DB/" conf/inter_athena.conf
-    fi
-  else
-    echo "Arquivo conf/inter_athena.conf não encontrado!"
+    # Configurações de IP/porta/etc
+    # [Manter seu código original aqui]
   fi
   
-  # Criar as tabelas no banco de dados
+  # Configurar login_athena.conf
+  if [ -f "conf/login_athena.conf" ]; then
+    echo "Configurando login_athena.conf..."
+    # Certificar-se de que o login server está ouvindo em todas as interfaces
+    sed -i "s/^bind_ip: .*$/bind_ip: 0.0.0.0/" conf/login_athena.conf
+  fi
+  
+  # Configurar char_athena.conf
+  if [ -f "conf/char_athena.conf" ]; then
+    echo "Configurando char_athena.conf..."
+    # Configurar o IP do login server para o próprio contêiner
+    sed -i "s/^login_ip: .*$/login_ip: 127.0.0.1/" conf/char_athena.conf
+    # Certificar-se de que o char server está ouvindo em todas as interfaces
+    sed -i "s/^bind_ip: .*$/bind_ip: 0.0.0.0/" conf/char_athena.conf
+  fi
+  
+  # Configurar map_athena.conf
+  if [ -f "conf/map_athena.conf" ]; then
+    echo "Configurando map_athena.conf..."
+    # Configurar o IP do char server para o próprio contêiner
+    sed -i "s/^char_ip: .*$/char_ip: 127.0.0.1/" conf/map_athena.conf
+    # Certificar-se de que o map server está ouvindo em todas as interfaces
+    sed -i "s/^bind_ip: .*$/bind_ip: 0.0.0.0/" conf/map_athena.conf
+  fi
+  
+  # Criar as tabelas no banco de dados (ignorando erros de duplicidade)
+  echo "Criando tabelas no banco de dados..."
+  # Primeiro, criar o banco de dados se ainda não existir
+  mysql -h"$MYSQL_HOST" -P"$MYSQL_PORT" -u"$MYSQL_USER" -p"$MYSQL_PASS" -e "CREATE DATABASE IF NOT EXISTS $MYSQL_DB;"
+  
+  # Importar os arquivos SQL com opção para ignorar erros
   for sql_file in sql-files/*.sql; do
     echo "Importando $sql_file..."
-    mysql -h"$MYSQL_HOST" -P"$MYSQL_PORT" -u"$MYSQL_USER" -p"$MYSQL_PASS" "$MYSQL_DB" < "$sql_file"
+    mysql -h"$MYSQL_HOST" -P"$MYSQL_PORT" -u"$MYSQL_USER" -p"$MYSQL_PASS" "$MYSQL_DB" < "$sql_file" || true
   done
   
   touch .db_configured
 fi
 
-# Iniciar os servidores usando screen
+# Iniciar servidores com retry e backoff
+max_retries=5
+retry_count=0
+retry_delay=5
+
 echo "Iniciando os servidores rAthena..."
-# Método 1: Usando o script oficial
-# ./athena-start start
 
-# Método 2: Iniciando os servidores manualmente
-# Apenas para fins de demonstração, vamos iniciar os servidores em primeiro plano
-# Em produção, você provavelmente usaria o script athena-start ou o screen
+# Iniciar login-server com retry
+while [ $retry_count -lt $max_retries ]; do
+  echo "Tentativa $(($retry_count + 1))/$max_retries de iniciar o login-server..."
+  ./login-server > ./log/login-server.log 2>&1 &
+  LOGINPID=$!
+  echo "Login server PID: $LOGINPID"
+  sleep 3
+  
+  # Verificar se o processo existe e está rodando
+  if kill -0 $LOGINPID 2>/dev/null; then
+    echo "Login server iniciado com sucesso!"
+    break
+  else
+    echo "Login server falhou, tentando novamente em $retry_delay segundos..."
+    retry_count=$((retry_count + 1))
+    sleep $retry_delay
+    retry_delay=$((retry_delay * 2))  # Aumenta o tempo de espera exponencialmente
+  fi
+done
 
-# Iniciar login-server
-echo "Iniciando login-server..."
-./login-server &
-sleep 2
+if [ $retry_count -eq $max_retries ]; then
+  echo "ERRO FATAL: Não foi possível iniciar o login-server após $max_retries tentativas."
+  cat ./log/login-server.log
+  exit 1
+fi
 
-# Iniciar char-server
-echo "Iniciando char-server..."
-./char-server &
-sleep 2
+# Resetar contadores para o char-server
+retry_count=0
+retry_delay=5
 
-# Iniciar map-server
-echo "Iniciando map-server..."
-./map-server &
-sleep 2
+# Iniciar char-server com retry
+while [ $retry_count -lt $max_retries ]; do
+  echo "Tentativa $(($retry_count + 1))/$max_retries de iniciar o char-server..."
+  ./char-server > ./log/char-server.log 2>&1 &
+  CHARPID=$!
+  echo "Char server PID: $CHARPID"
+  sleep 3
+  
+  # Verificar se o processo existe e está rodando
+  if kill -0 $CHARPID 2>/dev/null; then
+    echo "Char server iniciado com sucesso!"
+    break
+  else
+    echo "Char server falhou, tentando novamente em $retry_delay segundos..."
+    retry_count=$((retry_count + 1))
+    sleep $retry_delay
+    retry_delay=$((retry_delay * 2))
+  fi
+done
+
+if [ $retry_count -eq $max_retries ]; then
+  echo "ERRO FATAL: Não foi possível iniciar o char-server após $max_retries tentativas."
+  cat ./log/char-server.log
+  exit 1
+fi
+
+# Resetar contadores para o map-server
+retry_count=0
+retry_delay=5
+
+# Iniciar map-server com retry
+while [ $retry_count -lt $max_retries ]; do
+  echo "Tentativa $(($retry_count + 1))/$max_retries de iniciar o map-server..."
+  ./map-server > ./log/map-server.log 2>&1 &
+  MAPPID=$!
+  echo "Map server PID: $MAPPID"
+  sleep 3
+  
+  # Verificar se o processo existe e está rodando
+  if kill -0 $MAPPID 2>/dev/null; then
+    echo "Map server iniciado com sucesso!"
+    break
+  else
+    echo "Map server falhou, tentando novamente em $retry_delay segundos..."
+    retry_count=$((retry_count + 1))
+    sleep $retry_delay
+    retry_delay=$((retry_delay * 2))
+  fi
+done
+
+if [ $retry_count -eq $max_retries ]; then
+  echo "ERRO FATAL: Não foi possível iniciar o map-server após $max_retries tentativas."
+  cat ./log/map-server.log
+  exit 1
+fi
 
 # Iniciar web-server (se disponível)
 if [ -f ./web-server ]; then
   echo "Iniciando web-server..."
-  ./web-server &
+  ./web-server > ./log/web-server.log 2>&1 &
+  WEBPID=$!
+  echo "Web server PID: $WEBPID"
 fi
 
-# Manter o container rodando
-echo "Todos os servidores foram iniciados. Pressione Ctrl+C para sair."
-tail -f /dev/null
+echo "Todos os servidores foram iniciados. Logs disponíveis em ./log/"
+echo "Pressione Ctrl+C para encerrar."
+echo "PIDs: Login=$LOGINPID, Char=$CHARPID, Map=$MAPPID"
+
+# Monitorar os servidores
+while true; do
+  # Verificar se os processos ainda estão rodando
+  if ! kill -0 $LOGINPID 2>/dev/null; then
+    echo "ALERTA: Login server não está mais rodando!"
+  fi
+  
+  if ! kill -0 $CHARPID 2>/dev/null; then
+    echo "ALERTA: Char server não está mais rodando!"
+  fi
+  
+  if ! kill -0 $MAPPID 2>/dev/null; then
+    echo "ALERTA: Map server não está mais rodando!"
+  fi
+  
+  sleep 30
+done

@@ -11,7 +11,9 @@ services:
     volumes:
       - db_data:/var/lib/mysql
     networks:
-      - rathena-network
+      rathena-network:
+        aliases:
+          - db
 
   rathena:
     build: .
@@ -25,22 +27,20 @@ services:
       MYSQL_USER: ragnarok
       MYSQL_PASS: ragnarok
       MYSQL_DB: ragnarok
-      SERVER_MODE: local    # Modo de operação do servidor (local/production)
-      INTERSERVER_USER: s1  # Usuário para comunicação entre servidores
-      INTERSERVER_PASS: p1  # Senha para comunicação entre servidores
+      SERVER_MODE: local
+      INTERSERVER_USER: s1
+      INTERSERVER_PASS: p1
     ports:
       - "6900:6900"  # Login Server
       - "6121:6121"  # Char Server
       - "5121:5121"  # Map Server
       - "8888:8888"  # Web Server
     volumes:
-      # Para desenvolvimento, use bind mounts
-      # - ./conf:/home/rathena/rAthena/conf # Comentado para usar configurações internas primeiro
       - ./log:/home/rathena/rAthena/log
-      # - ./npc:/home/rathena/rAthena/npc # Comentado para usar NPCs internos primeiro
-      # - ./db:/home/rathena/rAthena/db # Comentado para usar DBs internos primeiro
     networks:
-      - rathena-network
+      rathena-network:
+        aliases:
+          - rathena
 
 networks:
   rathena-network:
