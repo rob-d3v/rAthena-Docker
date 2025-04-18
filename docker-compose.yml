@@ -2,7 +2,7 @@ services:
   db:
     image: mariadb:10.5
     container_name: rathena-db
-    restart: always
+    restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: ragnarok
@@ -10,17 +10,37 @@ services:
       MYSQL_PASSWORD: ragnarok
     volumes:
       - db_data:/var/lib/mysql
+      # Adicionar scripts de inicialização personalizados
+      - ./mysql-init:/docker-entrypoint-initdb.d
+    command: >
+      --innodb_flush_log_at_trx_commit=1
+      --innodb_flush_method=O_DIRECT
+      --innodb_buffer_pool_size=256M
+      --max_allowed_packet=64M
+      --innodb_fast_shutdown=0
+      --skip-name-resolve
+      --innodb_file_per_table=1
+      --innodb_buffer_pool_instances=4
+      --innodb_strict_mode=0
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "ragnarok", "-pragnarok"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
     networks:
       rathena-network:
         aliases:
           - db
+    stop_grace_period: 1m
 
   rathena:
     build: .
     container_name: rathena-server
-    restart: always
+    restart: unless-stopped
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       MYSQL_HOST: db
       MYSQL_PORT: 3306
@@ -30,6 +50,9 @@ services:
       SERVER_MODE: local
       INTERSERVER_USER: s1
       INTERSERVER_PASS: p1
+      # Adicionar variáveis para ajuste automático
+      AUTO_REPAIR_DB: "true"
+      AUTO_RESTART_SERVICES: "true"
     ports:
       - "6900:6900"  # Login Server
       - "6121:6121"  # Char Server
@@ -37,10 +60,19 @@ services:
       - "8888:8888"  # Web Server
     volumes:
       - ./log:/home/rathena/rAthena/log
+      # Adicionar scripts de monitoramento
+      - ./scripts:/home/rathena/scripts
+    healthcheck:
+      test: ["CMD", "bash", "/home/rathena/scripts/check_servers.sh"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 120s
     networks:
       rathena-network:
         aliases:
           - rathena
+    stop_grace_period: 1m
 
 networks:
   rathena-network:

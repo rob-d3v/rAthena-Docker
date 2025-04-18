@@ -1,7 +1,7 @@
 # Usar Debian 10 como base
 FROM debian:10
 
-# Instalar dependências necessárias
+# Adicione estas linhas ao seu Dockerfile existente
 RUN apt-get update && apt-get install -y \
   git \
   make \
@@ -17,6 +17,7 @@ RUN apt-get update && apt-get install -y \
   mariadb-client \
   screen \
   procps \
+  cron \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 

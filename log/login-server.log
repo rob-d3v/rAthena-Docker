@@ -21,6 +21,3 @@
 [Info]: Ipban connection made.
 [Status]: The login-server is ready (Server is listening on the port 6900).
 
-[Info]: Connection request of the char-server 'rAthena' @ 172.18.0.3:6121 (account: 's1', ip: '172.18.0.3')
-[Notice]: Authentication accepted (account: s1, id: 1, ip: 172.18.0.3)
-[Status]: Connection of the char-server 'rAthena' accepted.
