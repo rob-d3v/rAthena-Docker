@@ -18,7 +18,7 @@ Este projeto contém arquivos de configuração Docker para executar facilmente 
 ## Arquivos incluídos
 
 - `Dockerfile` - Define como construir a imagem do rAthena
-- `docker-compose.yml` - Orquestra os containers do rAthena e do banco de dados
+- `docker-compose.yml` - Orquestra os containers do rAthena, banco de dados e FluxCP
 - `start.sh` - Script de inicialização para os servidores dentro do container
 - `QRcode.png` - QR Code para doações via PIX
 
@@ -51,7 +51,7 @@ Este projeto contém arquivos de configuração Docker para executar facilmente 
    docker ps
    ```
    
-   Você deve ver dois containers em execução: `rathena-server` e `rathena-db`.
+   Você deve ver três containers em execução: `rathena-server`, `rathena-db` e `rathena-fluxcp`.
 
 4. Verifique os logs para garantir que tudo está funcionando corretamente
    ```bash
@@ -97,7 +97,7 @@ Siga os mesmos passos de clonagem e inicialização descritos na seção do Wind
 
 ## Arquitetura do sistema
 
-O projeto utiliza uma arquitetura de dois containers principais:
+O projeto utiliza uma arquitetura de três containers principais:
 
 1. **rathena-db** - Container MariaDB para armazenar todos os dados do jogo
    - Armazena contas, personagens, inventários, etc.
@@ -109,6 +109,11 @@ O projeto utiliza uma arquitetura de dois containers principais:
    - Map Server: Gerencia o mundo do jogo
    - Web Server: Interface web opcional
 
+3. **rathena-fluxcp** - Container com o painel de controle FluxCP
+   - Painel de administração para o servidor rAthena
+   - Interface web para gerenciamento de contas, personagens, etc.
+   - Permite aos jogadores criar contas e gerenciar seus personagens
+
 A comunicação entre os containers é feita através de uma rede Docker interna, garantindo segurança e desempenho.
 
 ## Portas utilizadas
@@ -119,6 +124,7 @@ O servidor rAthena usa as seguintes portas padrão:
 - Char Server: 6121
 - Map Server: 5121
 - Web Server: 8888
+- FluxCP: 80 (ou 8080, dependendo da configuração)
 
 Estas portas são expostas do container para o host, permitindo conexões de clientes do Ragnarok Online.
 
@@ -158,7 +164,7 @@ Para a maioria dos clientes, você precisa editar:
    <address>
      <version>55</version>
      <langtype>1</langtype>
-     <registrationweb>http://127.0.0.1:8888/</registrationweb>
+     <registrationweb>http://127.0.0.1:8080/</registrationweb>
      <address>127.0.0.1</address>
      <port>6900</port>
      <servertype>5</servertype>
@@ -180,6 +186,46 @@ A configuração do Docker monta os seguintes diretórios como volumes para perm
 - `./log` → `/home/rathena/rAthena/log`: Logs do servidor
 - `./npc` → `/home/rathena/rAthena/npc`: Scripts de NPCs
 - `./db` → `/home/rathena/rAthena/db`: Bancos de dados do jogo
+- `./fluxcp` → `/var/www/html`: Arquivos do FluxCP
+
+## FluxCP - Painel de Controle
+
+O FluxCP é um painel de controle web para o servidor rAthena que permite gerenciar contas, personagens, itens, e muito mais. Ele é incluído como um container separado nesta configuração.
+
+### Acessando o FluxCP
+
+Você pode acessar o FluxCP através do navegador usando:
+
+- URL: http://localhost:8080 (ou a porta que você configurou)
+
+### Configuração do FluxCP
+
+Os principais arquivos de configuração do FluxCP estão localizados em:
+
+- `./fluxcp/config/application.php` - Configurações gerais do FluxCP
+- `./fluxcp/config/servers.php` - Configurações de conexão com os servidores rAthena
+
+### Permissões para o FluxCP
+
+**Nota Importante**: Se você encontrar problemas de permissão ao acessar o FluxCP, pode ser necessário ajustar as permissões da pasta `data` dentro do container. Execute o seguinte comando:
+
+```bash
+docker exec -it rathena-fluxcp bash -c "chown -R www-data:www-data /var/www/html/data"
+# ou usando IDs
+docker exec -it rathena-fluxcp bash -c "chown -R 33:33 /var/www/html/data"
+```
+
+Para automatizar este processo, o script `docker-entrypoint.sh` foi incluído no container do FluxCP para garantir que as permissões sejam configuradas corretamente na inicialização do container.
+
+### Recursos do FluxCP
+
+- Registro e gerenciamento de contas
+- Visualização e edição de personagens
+- Loja de itens
+- Rankings de jogadores e guildas
+- Sistema de doações
+- Gerenciamento de GM
+- Visualização de logs e estatísticas
 
 ## Comandos úteis
 
@@ -201,6 +247,11 @@ docker-compose down
 ### Entrar no shell do container rAthena
 ```bash
 docker exec -it rathena-server bash
+```
+
+### Entrar no shell do container FluxCP
+```bash
+docker exec -it rathena-fluxcp bash
 ```
 
 ### Entrar no MySQL do container de banco de dados
@@ -248,6 +299,11 @@ Os dados do banco de dados MariaDB são armazenados em um volume Docker nomeado 
    docker-compose restart rathena
    ```
 
+### Customizar o FluxCP
+
+1. Edite os arquivos na pasta `fluxcp/` que foi montada como um volume
+2. As alterações serão imediatamente visíveis no navegador, sem necessidade de reiniciar o container
+
 ### Adicionar ou modificar NPCs
 
 1. Edite os arquivos na pasta `npc/` que foi montada como um volume
@@ -272,14 +328,14 @@ Para um ambiente de produção:
 2. Configure um firewall para limitar o acesso às portas do servidor:
    ```bash
    # UFW (Ubuntu/Debian)
-   sudo ufw allow from 192.168.1.0/24 to any port 6900,6121,5121,8888 proto tcp
+   sudo ufw allow from 192.168.1.0/24 to any port 6900,6121,5121,8888,8080 proto tcp
 
    # firewalld (CentOS/Fedora)
-   sudo firewall-cmd --permanent --add-port=6900/tcp --add-port=6121/tcp --add-port=5121/tcp --add-port=8888/tcp
+   sudo firewall-cmd --permanent --add-port=6900/tcp --add-port=6121/tcp --add-port=5121/tcp --add-port=8888/tcp --add-port=8080/tcp
    sudo firewall-cmd --reload
    ```
 
-3. Considere usar uma conexão HTTPS para o servidor web
+3. Considere usar uma conexão HTTPS para o servidor web e FluxCP
 4. Implemente uma solução de backup regular:
    ```bash
    # Adicione ao crontab
@@ -292,7 +348,7 @@ Para monitorar o desempenho dos seus containers, você pode usar:
 
 1. **Docker Stats**
    ```bash
-   docker stats rathena-server rathena-db
+   docker stats rathena-server rathena-db rathena-fluxcp
    ```
 
 2. **Portainer** - Interface web para gerenciamento de Docker
@@ -309,6 +365,31 @@ Para monitorar o desempenho dos seus containers, você pode usar:
 - Verifique se o WSL2 está instalado e configurado corretamente
 - Reinicie o Docker Desktop
 - Se persistir, reinicie o computador
+
+### Problemas com o FluxCP
+
+Se você encontrar problemas ao acessar o FluxCP ou ver erros relacionados a permissões:
+
+1. Verifique as permissões da pasta data:
+   ```bash
+   docker exec -it rathena-fluxcp bash -c "ls -la /var/www/html/data"
+   ```
+
+2. Corrija as permissões:
+   ```bash
+   docker exec -it rathena-fluxcp bash -c "chown -R www-data:www-data /var/www/html/data"
+   docker exec -it rathena-fluxcp bash -c "chmod -R 777 /var/www/html/data"
+   ```
+
+3. Verifique as configurações de conexão com o banco de dados em `fluxcp/config/servers.php`:
+   ```bash
+   docker exec -it rathena-fluxcp bash -c "cat /var/www/html/config/servers.php | grep -A 5 Hostname"
+   ```
+
+4. Certifique-se de que as configurações de conexão com o servidor rAthena estejam corretas em `fluxcp/config/application.php`:
+   ```bash
+   docker exec -it rathena-fluxcp bash -c "cat /var/www/html/config/application.php | grep -A 5 ServerAddress"
+   ```
 
 ### Problemas de compilação
 
@@ -420,7 +501,7 @@ Para criar uma conta administrativa no servidor:
    exit;
    ```
 
-4. Ou use o comando @addaccount dentro do jogo se você já tem uma conta administrativa.
+4. Ou use o painel FluxCP para criar e gerenciar contas com privilégios administrativos.
 
 ## Atualizando o rAthena
 
@@ -460,11 +541,13 @@ Para garantir que seus containers estejam sempre seguros:
    ```bash
    docker scan rathena-server
    docker scan rathena-db
+   docker scan rathena-fluxcp
    ```
 
 ## Baseado em
 
 - [rAthena](https://github.com/rathena/rathena)
+- [FluxCP](https://github.com/rathena/FluxCP)
 - [Documentação de instalação do rAthena para Debian](https://github.com/rathena/rathena/wiki/Install-on-Debian)
 
 ## Doações
