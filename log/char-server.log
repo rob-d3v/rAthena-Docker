@@ -32,77 +32,13 @@
 [Info]: Clan loaded (4 - Crossbow Clan)
 [Status]: Finished Reading GeoIP Database.
 [Status]: Characters per Account: '0'.
-[Status]: Defaulting to 172.18.0.3 as our IP address
+[Status]: Defaulting to 172.18.0.2 as our IP address
 [Info]: Start checking DB integrity
 [Info]: DB integrity check finished with success
 [Info]: Default map: 'prontera 156,191'
 [Status]: The char-server is ready (Server is listening on the port 6121).
 
 [Info]: Attempt to connect to login-server...
-[Status]: Connecting to 172.18.0.3:6900
+[Status]: Connecting to 172.18.0.2:6900
 [Status]: Connected to login-server (connection #5).
 [Status]: Awaiting maps from map-server.
-[Status]: Map-Server 0 connected: 1075 maps, from IP 172.18.0.3 port 5121.
-[Status]: Map-server 0 loading complete.
-[Info]: Loaded guild castle (0 - guild 0)
-[Info]: Loaded guild castle (1 - guild 0)
-[Info]: Loaded guild castle (2 - guild 0)
-[Info]: Loaded guild castle (3 - guild 0)
-[Info]: Loaded guild castle (4 - guild 0)
-[Info]: Loaded guild castle (5 - guild 0)
-[Info]: Loaded guild castle (6 - guild 0)
-[Info]: Loaded guild castle (7 - guild 0)
-[Info]: Loaded guild castle (8 - guild 0)
-[Info]: Loaded guild castle (9 - guild 0)
-[Info]: Loaded guild castle (10 - guild 0)
-[Info]: Loaded guild castle (11 - guild 0)
-[Info]: Loaded guild castle (12 - guild 0)
-[Info]: Loaded guild castle (13 - guild 0)
-[Info]: Loaded guild castle (14 - guild 0)
-[Info]: Loaded guild castle (15 - guild 0)
-[Info]: Loaded guild castle (16 - guild 0)
-[Info]: Loaded guild castle (17 - guild 0)
-[Info]: Loaded guild castle (18 - guild 0)
-[Info]: Loaded guild castle (19 - guild 0)
-[Info]: Loaded guild castle (20 - guild 0)
-[Info]: Loaded guild castle (21 - guild 0)
-[Info]: Loaded guild castle (22 - guild 0)
-[Info]: Loaded guild castle (23 - guild 0)
-[Info]: Loaded guild castle (24 - guild 0)
-[Info]: Loaded guild castle (25 - guild 0)
-[Info]: Loaded guild castle (26 - guild 0)
-[Info]: Loaded guild castle (27 - guild 0)
-[Info]: Loaded guild castle (28 - guild 0)
-[Info]: Loaded guild castle (29 - guild 0)
-[Info]: Loaded guild castle (30 - guild 0)
-[Info]: Loaded guild castle (31 - guild 0)
-[Info]: Loaded guild castle (32 - guild 0)
-[Info]: Loaded guild castle (33 - guild 0)
-[Info]: Loaded guild castle (34 - guild 0)
-[Info]: Loaded guild castle (35 - guild 0)
-[Info]: Loaded guild castle (36 - guild 0)
-[Info]: Loaded guild castle (37 - guild 0)
-[Info]: Loaded guild castle (38 - guild 0)
-[Info]: Loaded guild castle (39 - guild 0)
-[Info]: Loaded guild castle (40 - guild 0)
-[Info]: Loaded guild castle (41 - guild 0)
-[Info]: Loaded guild castle (42 - guild 0)
-[Info]: Loaded guild castle (43 - guild 0)
-[Info]: request connect - account_id:2000002/login_id1:1002689801/login_id2:1645369348
-[Info]: Loading Char Data (2000002)
-[Info]: Loading Char Data (2000002)
-[Info]: Created char: account: 2000002, char: 150004, slot: 0, name: aaaaaaaaaa
-[Info]: Char load request (150004)
-[Info]: Char load request (150004)
-[Info]: Loaded char (150004 - aaaaaaaaaa):  status memo 0 skills friends hotkeys mercenary
-[Info]: Selected char: (Account 2000002: 0 - aaaaaaaaaa)
-[Info]: Subnet check [172.18.0.1]: WAN
-[Info]: Loaded Storage data from table storage for account_id: 2000002 (total: 0)
-[Info]: Loaded Cart data from table cart_inventory for char_id: 150004 (total: 0)
-[Info]: Loaded Inventory data from table inventory for char_id: 150004 (total: 2)
-[Info]: mail load complete from DB - id: 150004 (total: 0)
-[Info]: achievement load complete from DB - id: 150004 (total: 0)
-[Info]: Saved Inventory (0) data to table inventory for char_id: 150004
-[Info]: Saved Cart (0) data to table cart_inventory for char_id: 150004
-[Info]: Saved char 150004 - aaaaaaaaaa: status skills.
-[Info]: achievement load complete from DB - id: 150004 (total: 0)

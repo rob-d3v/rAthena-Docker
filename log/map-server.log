@@ -16,9 +16,9 @@
 [Notice]: Please edit your 'login' table to create a proper inter-server user/password (gender 'S')
 [Notice]: and then edit your user/password in conf/map_athena.conf (or conf/import/map_conf.txt)
 [Warning]: Not all IP addresses in map_athena.conf configured, autodetecting...
-[Info]: Defaulting to 172.18.0.3 as our IP address
-[Info]: Map Server IP Address : '172.18.0.3' -> '172.18.0.3'.
-[Info]: Char Server IP Address : '172.18.0.3' -> '172.18.0.3'.
+[Info]: Defaulting to 172.18.0.2 as our IP address
+[Info]: Map Server IP Address : '172.18.0.2' -> '172.18.0.2'.
+[Info]: Char Server IP Address : '172.18.0.2' -> '172.18.0.2'.
 [Status]: Using SQL dbs: no
 [Info]: Logging item transactions to table 'picklog'.
 [Info]: Logging commands to table 'atcommandlog'.
@@ -164,21 +164,3 @@
 	-'0' Mobs Not Cached
 [Info]: Checking '22' NPC Markets...
 [Status]: Done checking '22' NPC Markets.
-[Status]: Event 'OnInit' executed with '2506' NPCs.
-[Status]: Server is 'ready' and listening on port '5121'.
-
-[Status]: Attempting to connect to Char Server. Please wait.
-[Status]: Connecting to 172.18.0.3:6121
-[Status]: Logging in to char server...
-[Status]: Successfully logged on to Char Server (Connection: '7').
-[Status]: Sending maps to char server...
-[Status]: Event 'OnInterIfInit' executed with '0' NPCs.
-[Status]: Event 'OnInterIfInitOnce' executed with '1' NPCs.
-[Status]: Requested '44' guild castles from char-server...
-[Status]: Map-server connected to char-server 'Server'.
-[Status]: Map Server is now online.
-[Info]: Received Fame List of '0' characters.
-[Status]: Received '44' guild castles from char-server.
-[Status]: Received '4' clans from char-server.
-[Info]: 'aaaaaaaaaa' logged in. (AID/CID: '2000002/150004', IP: '172.18.0.1', Group '0').
-[Info]: Character 'aaaaaaaaaa' logged off.
