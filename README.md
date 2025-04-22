@@ -20,7 +20,6 @@ Este projeto contém arquivos de configuração Docker para executar facilmente 
 - `Dockerfile` - Define como construir a imagem do rAthena
 - `docker-compose.yml` - Orquestra os containers do rAthena, banco de dados e FluxCP
 - `start.sh` - Script de inicialização para os servidores dentro do container
-- `QRcode.png` - QR Code para doações via PIX
 
 ## Instalação em diferentes sistemas operacionais
 
@@ -123,7 +122,6 @@ O servidor rAthena usa as seguintes portas padrão:
 - Login Server: 6900
 - Char Server: 6121
 - Map Server: 5121
-- Web Server: 8888
 - FluxCP: 80 (ou 8080, dependendo da configuração)
 
 Estas portas são expostas do container para o host, permitindo conexões de clientes do Ragnarok Online.
@@ -155,11 +153,11 @@ Abra o Terminal e digite:
 ifconfig | grep "inet " | grep -v 127.0.0.1
 ```
 
-### Configuração de arquivos do cliente
+### Configuração de arquivos do cliente (Client de sugestão com Renewal,Pré e 4th será postado em versões futuras)
 
-Para a maioria dos clientes, você precisa editar:
+Para a maioria dos clientes, você precisa editar, dentro da pasta data, ou criar.
 
-1. **clientinfo.xml** ou **data.ini**:
+1. **clientinfo.xml** 
    ```xml
    <address>
      <version>55</version>
@@ -171,12 +169,6 @@ Para a maioria dos clientes, você precisa editar:
      <serviceType>0</serviceType>
    </address>
    ```
-
-2. **Ou através do OpenSetup** (se disponível):
-   - Nome: Meu Servidor rAthena
-   - IP: 127.0.0.1 (ou seu IP)
-   - Porta: 6900
-   - Versão: A mesma do seu cliente
 
 ## Estrutura de diretórios
 
@@ -493,8 +485,9 @@ Para criar uma conta administrativa no servidor:
 
 2. Crie uma conta com nível de acesso 99:
    ```sql
-   INSERT INTO login (account_id, userid, user_pass, sex, group_id) VALUES (2000000, 'admin', MD5('senha'), 'M', 99);
+   INSERT INTO login (account_id, userid, user_pass, sex, group_id) VALUES (2000000, 'admin', 'senha', 'M', 99);
    ```
+*OBS: se desejar pode ser adicionado criptografia MD5 no servidor para armazenar as senhas no banco.
 
 3. Saia do MySQL:
    ```sql
@@ -554,7 +547,7 @@ Para garantir que seus containers estejam sempre seguros:
 
 Se este projeto foi útil para você, considere fazer uma doação para apoiar o desenvolvimento contínuo:
 
-![QR Code PIX](QRcode.png)
+![QR Code PIX](qrCode.pngg)
 
 Escaneie o código QR acima para fazer uma doação via PIX.
 
