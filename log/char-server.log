@@ -10,25 +10,23 @@
                                                                       
                      http://rathena.org/board/                        
                                                                       
-[Info]: Git Hash: '0a633386504bd580fd34f2a798fc250b9df22a69'
 [Info]: Server uses 'select' as event dispatcher
 [Info]: Server supports up to '1024' concurrent connections.
 [Info]: Done reading conf/import/char_conf.txt.
 [Info]: Done reading conf/char_athena.conf.
 [Info]: Done reading conf/import/inter_conf.txt.
 [Info]: Done reading conf/inter_athena.conf.
-[Info]: Done reading '169' messages in 'conf/msg_conf/char_msg.conf'.
+[Info]: Done reading '149' messages in 'conf/msg_conf/char_msg.conf'.
 [Warning]: Using the default user/password s1/p1 is NOT RECOMMENDED.
 [Notice]: Please edit your 'login' table to create a proper inter-server user/password (gender 'S')
 [Notice]: And then change the user/password to use in conf/char_athena.conf (or conf/import/char_conf.txt)
 [Info]: Done reading conf/import/inter_conf.txt.
 [Info]: Done reading conf/inter_athena.conf.
 [Info]: Connect Character DB server.... (Character Server)
-[Status]: Loading 'conf/inter_server.yml'...[Status]: Loading '1' entries in 'conf/inter_server.yml'
-[Status]: Done reading '1' entries in 'conf/inter_server.yml'
-[Status]: Loading 'conf/import/inter_server.yml'...[Status]: Loading 'db/exp_guild.yml'...[Status]: Loading 'db/re/exp_guild.yml'...[Status]: Loading '49' entries in 'db/re/exp_guild.yml'
-[Status]: Done reading '49' entries in 'db/re/exp_guild.yml'
-[Status]: Loading 'db/import/exp_guild.yml'...[Info]: Clan loaded (1 - Swordman Clan)
+[Status]: Loading 'conf/inter_server.yml'...[Status]: Loading [1/1] entries from 'conf/inter_server.yml'[Status]: Done reading '1' entries in 'conf/inter_server.yml'
+[Status]: Loading 'conf/import/inter_server.yml'...[Status]: Done reading '50' entries in 'db/re/exp_guild.txt'.
+[Status]: Done reading '0' entries in 'db/import/exp_guild.txt'.
+[Info]: Clan loaded (1 - Swordman Clan)
 [Info]: Clan loaded (2 - Arcwand Clan)
 [Info]: Clan loaded (3 - Golden Mace Clan)
 [Info]: Clan loaded (4 - Crossbow Clan)
@@ -37,9 +35,70 @@
 [Status]: Defaulting to 172.18.0.3 as our IP address
 [Info]: Start checking DB integrity
 [Info]: DB integrity check finished with success
+[Info]: Default map: 'prontera 156,191'
 [Status]: The char-server is ready (Server is listening on the port 6121).
 
 [Info]: Attempt to connect to login-server...
 [Status]: Connecting to 172.18.0.3:6900
-[Status]: Connected to login-server (connection #6).
+[Status]: Connected to login-server (connection #5).
 [Status]: Awaiting maps from map-server.
+[Info]: request connect - account_id:2000000/login_id1:265319239/login_id2:1164452157
+[Info]: Loading Char Data (2000000)
+[Info]: Loading Char Data (2000000)
+[Info]: Created char: account: 2000000, char: 150000, slot: 1, name: robd3v
+[Info]: Char load request (150000)
+[Status]: Map-Server 0 connected: 1075 maps, from IP 172.18.0.3 port 5121.
+[Status]: Map-server 0 loading complete.
+[Info]: Loaded guild castle (0 - guild 0)
+[Info]: Loaded guild castle (1 - guild 0)
+[Info]: Loaded guild castle (2 - guild 0)
+[Info]: Loaded guild castle (3 - guild 0)
+[Info]: Loaded guild castle (4 - guild 0)
+[Info]: Loaded guild castle (5 - guild 0)
+[Info]: Loaded guild castle (6 - guild 0)
+[Info]: Loaded guild castle (7 - guild 0)
+[Info]: Loaded guild castle (8 - guild 0)
+[Info]: Loaded guild castle (9 - guild 0)
+[Info]: Loaded guild castle (10 - guild 0)
+[Info]: Loaded guild castle (11 - guild 0)
+[Info]: Loaded guild castle (12 - guild 0)
+[Info]: Loaded guild castle (13 - guild 0)
+[Info]: Loaded guild castle (14 - guild 0)
+[Info]: Loaded guild castle (15 - guild 0)
+[Info]: Loaded guild castle (16 - guild 0)
+[Info]: Loaded guild castle (17 - guild 0)
+[Info]: Loaded guild castle (18 - guild 0)
+[Info]: Loaded guild castle (19 - guild 0)
+[Info]: Loaded guild castle (20 - guild 0)
+[Info]: Loaded guild castle (21 - guild 0)
+[Info]: Loaded guild castle (22 - guild 0)
+[Info]: Loaded guild castle (23 - guild 0)
+[Info]: Loaded guild castle (24 - guild 0)
+[Info]: Loaded guild castle (25 - guild 0)
+[Info]: Loaded guild castle (26 - guild 0)
+[Info]: Loaded guild castle (27 - guild 0)
+[Info]: Loaded guild castle (28 - guild 0)
+[Info]: Loaded guild castle (29 - guild 0)
+[Info]: Loaded guild castle (30 - guild 0)
+[Info]: Loaded guild castle (31 - guild 0)
+[Info]: Loaded guild castle (32 - guild 0)
+[Info]: Loaded guild castle (33 - guild 0)
+[Info]: Loaded guild castle (34 - guild 0)
+[Info]: Loaded guild castle (35 - guild 0)
+[Info]: Loaded guild castle (36 - guild 0)
+[Info]: Loaded guild castle (37 - guild 0)
+[Info]: Loaded guild castle (38 - guild 0)
+[Info]: Loaded guild castle (39 - guild 0)
+[Info]: Loaded guild castle (40 - guild 0)
+[Info]: Loaded guild castle (41 - guild 0)
+[Info]: Loaded guild castle (42 - guild 0)
+[Info]: Loaded guild castle (43 - guild 0)
+[Info]: Char load request (150000)
+[Info]: Loaded char (150000 - robd3v):  status memo 0 skills friends hotkeys mercenary
+[Info]: Selected char: (Account 2000000: 1 - robd3v)
+[Info]: Subnet check [172.18.0.1]: WAN
+[Info]: Loaded Storage data from table storage for account_id: 2000000 (total: 0)
+[Info]: Loaded Cart data from table cart_inventory for char_id: 150000 (total: 0)
+[Info]: Loaded Inventory data from table inventory for char_id: 150000 (total: 2)
+[Info]: mail load complete from DB - id: 150000 (total: 0)
+[Info]: achievement load complete from DB - id: 150000 (total: 0)

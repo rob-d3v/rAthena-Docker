@@ -10,7 +10,6 @@
                                                                       
                      http://rathena.org/board/                        
                                                                       
-[Info]: Git Hash: '0a633386504bd580fd34f2a798fc250b9df22a69'
 [Info]: Server uses 'select' as event dispatcher
 [Info]: Server supports up to '1024' concurrent connections.
 [Info]: Finished reading conf/import/inter_conf.txt.
@@ -21,3 +20,11 @@
 [Info]: Ipban connection made.
 [Status]: The login-server is ready (Server is listening on the port 6900).
 
+[Info]: Connection request of the char-server 'rAthena' @ 172.18.0.3:6121 (account: 's1', ip: '172.18.0.3')
+[Notice]: Authentication accepted (account: s1, id: 1, ip: 172.18.0.3)
+[Status]: Connection of the char-server 'rAthena' accepted.
+[Status]: Request for connection of robd3v (ip: 172.18.0.1)
+[Notice]: Authentication accepted (account: robd3v, id: 2000000, ip: 172.18.0.1)
+[Status]: Connection of the account 'robd3v' accepted.
+[Info]: Closed connection from '172.18.0.1'.
+[Status]: set users rAthena : 1
