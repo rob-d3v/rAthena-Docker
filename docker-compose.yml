@@ -10,7 +10,6 @@ services:
       MYSQL_PASSWORD: ragnarok
     volumes:
       - db_data:/var/lib/mysql
-      # Adicionar scripts de inicialização personalizados
       - ./mysql-init:/docker-entrypoint-initdb.d
     command: >
       --innodb_flush_log_at_trx_commit=1
@@ -33,7 +32,7 @@ services:
         aliases:
           - db
     stop_grace_period: 1m
-
+    
   rathena:
     build: .
     container_name: rathena-server
@@ -50,7 +49,6 @@ services:
       SERVER_MODE: local
       INTERSERVER_USER: s1
       INTERSERVER_PASS: p1
-      # Adicionar variáveis para ajuste automático
       AUTO_REPAIR_DB: "true"
       AUTO_RESTART_SERVICES: "true"
     ports:
@@ -60,7 +58,6 @@ services:
       - "8888:8888"  # Web Server
     volumes:
       - ./log:/home/rathena/rAthena/log
-      # Adicionar scripts de monitoramento
       - ./scripts:/home/rathena/scripts
     healthcheck:
       test: ["CMD", "bash", "/home/rathena/scripts/check_servers.sh"]
@@ -72,6 +69,31 @@ services:
       rathena-network:
         aliases:
           - rathena
+    stop_grace_period: 1m
+
+  fluxcp:
+    build: ./fluxcp
+    container_name: rathena-fluxcp
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+      rathena:
+        condition: service_healthy
+    environment:
+      MYSQL_HOST: db
+      MYSQL_PORT: 3306
+      MYSQL_USER: ragnarok
+      MYSQL_PASSWORD: ragnarok
+      MYSQL_DATABASE: ragnarok
+    ports:
+      - "8080:80"  # Alterado para mapear a porta 8080 do host para a porta 80 do container
+    volumes:
+      - ./fluxcp:/var/www/html
+    networks:
+      rathena-network:
+        aliases:
+          - fluxcp
     stop_grace_period: 1m
 
 networks:

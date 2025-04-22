@@ -23,8 +23,12 @@
 [Info]: Connection request of the char-server 'rAthena' @ 172.18.0.3:6121 (account: 's1', ip: '172.18.0.3')
 [Notice]: Authentication accepted (account: s1, id: 1, ip: 172.18.0.3)
 [Status]: Connection of the char-server 'rAthena' accepted.
-[Status]: Request for connection of robd3v (ip: 172.18.0.1)
-[Notice]: Authentication accepted (account: robd3v, id: 2000000, ip: 172.18.0.1)
-[Status]: Connection of the account 'robd3v' accepted.
+[Status]: Request for connection of nataniel (ip: 172.18.0.1)
+[Notice]: Invalid password (account: 'nataniel', ip: 172.18.0.1)
+[Info]: Closed connection from '172.18.0.1'.
+[Status]: Request for connection of nataniel (ip: 172.18.0.1)
+[Notice]: Authentication accepted (account: nataniel, id: 2000002, ip: 172.18.0.1)
+[Status]: Connection of the account 'nataniel' accepted.
 [Info]: Closed connection from '172.18.0.1'.
 [Status]: set users rAthena : 1
+[Status]: set users rAthena : 0
