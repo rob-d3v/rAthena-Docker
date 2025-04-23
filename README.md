@@ -128,6 +128,11 @@ Estas portas são expostas do container para o host, permitindo conexões de cli
 
 ## Configuração do cliente Ragnarok
 
+https://1drv.ms/u/s!Ap-GSbZ2M5Mzh0S4cS0nG3ZFBwkx?e=H8ui15 (Client Renewal, Pre-Renewal e 4th)
+https://1drv.ms/u/s!Ap-GSbZ2M5Mzh0UdO8crrx5zIUkA?e=xWbKQU (kRO)
+
+Baixe os dois arquivos acima, escolha qual tipo de servidor Renewal, Pre-Renewal ou 4th e copie para dentro do kRO
+
 Configure seu cliente Ragnarok Online para se conectar ao servidor usando:
 
 - Endereço: 127.0.0.1 (para acesso local) ou seu IP local/público (para acesso remoto)
@@ -153,7 +158,7 @@ Abra o Terminal e digite:
 ifconfig | grep "inet " | grep -v 127.0.0.1
 ```
 
-### Configuração de arquivos do cliente (Client de sugestão com Renewal,Pré e 4th será postado em versões futuras)
+### Configuração de arquivos do cliente 
 
 Para a maioria dos clientes, você precisa editar, dentro da pasta data, ou criar.
 
