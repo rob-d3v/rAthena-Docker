@@ -547,13 +547,9 @@ Para garantir que seus containers estejam sempre seguros:
 
 Se este projeto foi útil para você, considere fazer uma doação para apoiar o desenvolvimento contínuo:
 
-![QR Code PIX](qrCode.pngg)
+![QR Code PIX](qrCode.png)
 
 Escaneie o código QR acima para fazer uma doação via PIX.
-
-## Autor
-
-Desenvolvido por **Rob Dev** com carinho.
 
 - LinkedIn: [https://www.linkedin.com/in/robseng/](https://www.linkedin.com/in/robseng/)
 - GitHub: [https://github.com/rob-d3v](https://github.com/rob-d3v)
