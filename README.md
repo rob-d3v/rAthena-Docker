@@ -1,10 +1,7 @@
 # rAthena Docker
 
-![rAthena Logo](https://rathena.org/board/uploads/monthly_2018_05/logo.thumb.png.32fe7c229507d317d8455d970789d8ef.png)
-
 Este projeto contém arquivos de configuração Docker para executar facilmente um servidor rAthena, um emulador de servidor de MMORPG baseado no Ragnarok Online.
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/rob-d3v/rathena.svg)](https://hub.docker.com/r/rob-d3v/rathena)
 [![GitHub stars](https://img.shields.io/github/stars/rob-d3v/rathena-docker.svg)](https://github.com/rob-d3v/rathena-docker/stargazers)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/rathena/rathena/blob/master/LICENSE)
 
@@ -20,7 +17,9 @@ Este projeto contém arquivos de configuração Docker para executar facilmente 
 - `Dockerfile` - Define como construir a imagem do rAthena
 - `docker-compose.yml` - Orquestra os containers do rAthena, banco de dados e FluxCP
 - `start.sh` - Script de inicialização para os servidores dentro do container
-
+- `rathena` - Arquivos base do rAthena, pode ser escolhido outro a preferência ou pode excluir, fazendo com que o script docker baixe o mais atual no repositório oficial do rAthena
+- `fuxcp` - Arquivos base do fluxcp, pode ser escolhido outro a preferência ou pode excluir, fazendo com que o script docker baixe o mais atual no repositório oficial do rAthena fluxcp
+  
 ## Instalação em diferentes sistemas operacionais
 
 ### Windows
@@ -174,7 +173,6 @@ Para a maioria dos clientes, você precisa editar, dentro da pasta data, ou cria
      <serviceType>0</serviceType>
    </address>
    ```
-
 ## Estrutura de diretórios
 
 A configuração do Docker monta os seguintes diretórios como volumes para permitir a personalização:
