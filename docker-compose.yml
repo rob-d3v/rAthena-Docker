@@ -12,17 +12,9 @@ services:
       - db_data:/var/lib/mysql
       - ./mysql-init:/docker-entrypoint-initdb.d
     command: >
-      --innodb_flush_log_at_trx_commit=1
-      --innodb_flush_method=O_DIRECT
-      --innodb_buffer_pool_size=256M
-      --max_allowed_packet=64M
-      --innodb_fast_shutdown=0
-      --skip-name-resolve
-      --innodb_file_per_table=1
-      --innodb_buffer_pool_instances=4
-      --innodb_strict_mode=0
+      --innodb_flush_log_at_trx_commit=1 --innodb_flush_method=O_DIRECT --innodb_buffer_pool_size=256M --max_allowed_packet=64M --innodb_fast_shutdown=0 --skip-name-resolve --innodb_file_per_table=1 --innodb_buffer_pool_instances=4 --innodb_strict_mode=0
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "ragnarok", "-pragnarok"]
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "ragnarok", "-pragnarok" ]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -32,7 +24,7 @@ services:
         aliases:
           - db
     stop_grace_period: 1m
-    
+
   rathena:
     build: .
     container_name: rathena-server
@@ -52,15 +44,15 @@ services:
       AUTO_REPAIR_DB: "true"
       AUTO_RESTART_SERVICES: "true"
     ports:
-      - "6900:6900"  # Login Server
-      - "6121:6121"  # Char Server
-      - "5121:5121"  # Map Server
-      - "8888:8888"  # Web Server
+      - "6900:6900" # Login Server
+      - "6121:6121" # Char Server
+      - "5121:5121" # Map Server
+      - "8888:8888" # Web Server
     volumes:
       - ./log:/home/rathena/rAthena/log
       - ./scripts:/home/rathena/scripts
     healthcheck:
-      test: ["CMD", "bash", "/home/rathena/scripts/check_servers.sh"]
+      test: [ "CMD", "bash", "/home/rathena/scripts/check_servers.sh" ]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -70,7 +62,6 @@ services:
         aliases:
           - rathena
     stop_grace_period: 1m
-
   fluxcp:
     build: ./fluxcp
     container_name: rathena-fluxcp
@@ -87,9 +78,17 @@ services:
       MYSQL_PASSWORD: ragnarok
       MYSQL_DATABASE: ragnarok
     ports:
-      - "8080:80"  # Alterado para mapear a porta 8080 do host para a porta 80 do container
+      - "8080:80" # Alterado para mapear a porta 8080 do host para a porta 80 do container
     volumes:
       - ./fluxcp:/var/www/html
+    # Comando para executar os chown na inicialização e depois iniciar o Apache
+    command: >
+      bash -c "
+        chown -R 33:33 /var/www/html/data/logs &&
+        chown -R 33:33 /var/www/html/data/itemshop &&
+        chown -R 33:33 /var/www/html/data/tmp &&
+        apache2-foreground
+      "
     networks:
       rathena-network:
         aliases:
