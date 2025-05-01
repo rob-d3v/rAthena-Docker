@@ -1,0 +1,47 @@
+﻿  achievement.cpp
+  atcommand.cpp
+  battle.cpp
+  battleground.cpp
+  buyingstore.cpp
+  cashshop.cpp
+  channel.cpp
+  chat.cpp
+  chrif.cpp
+  clan.cpp
+  clif.cpp
+  date.cpp
+  duel.cpp
+  elemental.cpp
+  guild.cpp
+  homunculus.cpp
+  instance.cpp
+  intif.cpp
+  itemdb.cpp
+  log.cpp
+  Compilando...
+  mail.cpp
+  map.cpp
+  mapreg.cpp
+  mercenary.cpp
+  npc.cpp
+  npc_chat.cpp
+  party.cpp
+  path.cpp
+  pc.cpp
+  pc_groups.cpp
+  pet.cpp
+  quest.cpp
+  script.cpp
+  searchstore.cpp
+  skill.cpp
+  status.cpp
+  storage.cpp
+  trade.cpp
+  unit.cpp
+  vending.cpp
+  mob.cpp
+  Gerando código
+  Previous IPDB not found, fall back to full compilation.
+  All 16512 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finalizada a geração de código
+  map-server.vcxproj -> C:\Users\Speed\Desktop\Emulador\map-server.exe

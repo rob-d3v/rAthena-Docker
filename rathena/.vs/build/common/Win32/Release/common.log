@@ -1,0 +1,24 @@
+﻿  cli.cpp
+  conf.cpp
+  core.cpp
+  database.cpp
+  db.cpp
+  des.cpp
+  ers.cpp
+  grfio.cpp
+  malloc.cpp
+  mapindex.cpp
+  md5calc.cpp
+  msg_conf.cpp
+  nullpo.cpp
+  random.cpp
+  showmsg.cpp
+  socket.cpp
+  sql.cpp
+  strlib.cpp
+  timer.cpp
+  utils.cpp
+  Compilando...
+  winapi.cpp
+  utilities.cpp
+  common.vcxproj -> C:\Users\Speed\Desktop\Emulador\.vs\build\common.lib

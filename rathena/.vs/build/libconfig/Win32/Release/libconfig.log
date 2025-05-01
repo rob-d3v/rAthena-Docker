@@ -1,0 +1,6 @@
+﻿  grammar.c
+  libconfig.c
+  scanctx.c
+  scanner.c
+  strbuf.c
+  libconfig.vcxproj -> C:\Users\Speed\Desktop\Emulador\.vs\build\libconfig.lib

@@ -1,0 +1,12 @@
+﻿  account.cpp
+  ipban.cpp
+  login.cpp
+  loginchrif.cpp
+  loginclif.cpp
+  logincnslif.cpp
+  loginlog.cpp
+  Gerando código
+  Previous IPDB not found, fall back to full compilation.
+  All 735 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finalizada a geração de código
+  login-server.vcxproj -> C:\Users\Speed\Desktop\Emulador\login-server.exe

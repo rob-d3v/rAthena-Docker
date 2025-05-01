@@ -1,0 +1,23 @@
+﻿  char.cpp
+  char_clif.cpp
+  char_cnslif.cpp
+  char_logif.cpp
+  char_mapif.cpp
+  inter.cpp
+  int_achievement.cpp
+  int_auction.cpp
+  int_clan.cpp
+  int_elemental.cpp
+  int_guild.cpp
+  int_homun.cpp
+  int_mail.cpp
+  int_mercenary.cpp
+  int_party.cpp
+  int_pet.cpp
+  int_quest.cpp
+  int_storage.cpp
+  Gerando código
+  Previous IPDB not found, fall back to full compilation.
+  All 3562 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finalizada a geração de código
+  char-server.vcxproj -> C:\Users\Speed\Desktop\Emulador\char-server.exe
